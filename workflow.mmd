@@ -1,0 +1,36 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	validate_query(validate_query)
+	classify_query(classify_query)
+	retrieve_personal(retrieve_personal)
+	retrieve_policy(retrieve_policy)
+	retrieve_compare(retrieve_compare)
+	retrieve_aggregate(retrieve_aggregate)
+	assemble_context(assemble_context)
+	generate_answer(generate_answer)
+	format_response(format_response)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> validate_query;
+	assemble_context -.-> format_response;
+	assemble_context -.-> generate_answer;
+	classify_query -.-> format_response;
+	classify_query -.-> retrieve_aggregate;
+	classify_query -.-> retrieve_compare;
+	classify_query -.-> retrieve_personal;
+	classify_query -.-> retrieve_policy;
+	generate_answer --> format_response;
+	retrieve_aggregate --> assemble_context;
+	retrieve_compare --> assemble_context;
+	retrieve_personal --> assemble_context;
+	retrieve_policy --> assemble_context;
+	validate_query -.-> classify_query;
+	validate_query -.-> format_response;
+	format_response --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
